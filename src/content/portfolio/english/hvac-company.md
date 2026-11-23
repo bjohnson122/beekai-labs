@@ -14,6 +14,7 @@ results: "[TODO: add results once there is something real to report]"
 # TODO: add the site URL, for example liveUrl: "https://..."
 status: "In progress" # Live | Concept | In progress
 featured: false
+excludeFromCollection: true
 # TODO: replace the placeholder screenshots (desktop about 1440×900, mobile about 390×844)
 coverImage: "/images/portfolio/hvac-company-desktop.jpg"
 mobileImage: "/images/portfolio/hvac-company-mobile.jpg"

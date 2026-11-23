@@ -28,12 +28,16 @@ const {
 );
 
 const t = await useTranslations(Astro.currentLocale as string);
-const { email, phone, serviceArea } = config.settings.contactInfo;
+const contactInfo = config.settings.contactInfo;
 
 const contactDetails = [
-  { icon: "Mail", label: t("common.emailLabel"), value: email },
-  { icon: "Phone", label: t("common.phoneLabel"), value: phone },
-  { icon: "MapPin", label: t("common.serviceAreaLabel"), value: serviceArea },
+  // { icon: "Mail", label: t("common.emailLabel"), value: contactInfo.email },
+  // { icon: "Phone", label: t("common.phoneLabel"), value: contactInfo.phone },
+  {
+    icon: "MapPin",
+    label: t("common.serviceAreaLabel"),
+    value: contactInfo.serviceArea,
+  },
 ].filter((item) => item.value);
 
 if (!enable) {

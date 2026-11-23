@@ -13,6 +13,7 @@ solution: "[TODO: describe what we built. Example: website form sent to email an
 results: "[TODO: add results once there is something real to report]"
 status: "In progress" # Live | Concept | In progress
 featured: false
+excludeFromCollection: true
 icon: "Workflow" # Lucide icon shown instead of a screenshot
 gallery: []
 ---

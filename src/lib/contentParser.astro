@@ -29,7 +29,11 @@ export const getCollectionCTM = async <C extends CollectionKey>(
   const pages: CollectionEntry<C>[] = (await getCollection(
     collectionName as any,
     (item: any) => {
-      return item.id.startsWith(contentDir) && !item.id.includes("-index");
+      return (
+        item.id.startsWith(contentDir) &&
+        !item.id.includes("-index") &&
+        !item.data.excludeFromCollection
+      );
     },
   )) as CollectionEntry<C>[];
 

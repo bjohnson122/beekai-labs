@@ -13,6 +13,7 @@ solution: "An AI phone assistant that answers calls, books appointments and text
 results: "[TODO: add results once there is something real to report]"
 status: "In progress" # Live | Concept | In progress
 featured: true
+excludeFromCollection: true
 icon: "PhoneCall" # Lucide icon shown instead of a screenshot
 gallery: []
 ---

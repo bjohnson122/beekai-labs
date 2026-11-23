@@ -24,9 +24,14 @@ const portfolioDefaults = {
 ---
 
 <Base {...page.data} headerPosition="fixed" hasHeaderDarkBackground={true}>
-  <PageHeader title={title} description={description} />
+  <PageHeader
+    title={title}
+    description={description}
+    compactBottomPadding={true}
+  />
   <PortfolioSection
     content={overrideObjects(portfolioDefaults, portfolioSection)}
+    compactTopSpacing={true}
   />
   <CallToAction content={ctaSection} />
 </Base>

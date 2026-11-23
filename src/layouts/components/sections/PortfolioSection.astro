@@ -14,7 +14,10 @@ type PortfolioContent = NonNullable<z.infer<typeof portfolioSectionSchema>>;
 
 type Props = {
   content?: PortfolioContent;
+  compactTopSpacing?: boolean;
 };
+
+const { compactTopSpacing = false } = Astro.props;
 
 const {
   enable = true,
@@ -55,15 +58,17 @@ const categories = (await getPortfolioCategories())
   }))
   .filter((category) => category.projects.length > 0);
 
-const gridClass = "grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3";
+const gridClass = "grid grid-cols-1 justify-items-center gap-8 md:grid-cols-2";
 
 if (!enable) {
   return null;
 }
 ---
 
-<section id="projects">
-  <div class="container space-y-12">
+<section
+  id="projects"
+  class:list={compactTopSpacing && "!pt-10 md:!pt-16"}>
+  <div class="container space-y-0">
     <SectionHeader title={title} description={description} />
 
     <div class="space-y-10" data-filter-root>
@@ -78,10 +83,14 @@ if (!enable) {
           <div class="space-y-14">
             {categories.map((category) => (
               <div class="space-y-6" data-filter-group={category.id}>
-                <h3 class="text-h4-sm md:text-h4">{category.title}</h3>
+                <h3 class="text-h4-sm text-center md:text-h4">{category.title}</h3>
                 <div class={gridClass}>
                   {category.projects.map((project) => (
-                    <PortfolioCard content={project} headingTag="h4" />
+                    <PortfolioCard
+                      content={project}
+                      headingTag="h4"
+                      class="w-full max-w-sm"
+                    />
                   ))}
                 </div>
               </div>
@@ -90,7 +99,10 @@ if (!enable) {
         ) : (
           <div class={gridClass}>
             {projects.map((project) => (
-              <PortfolioCard content={project} />
+              <PortfolioCard
+                content={project}
+                class="w-full max-w-sm"
+              />
             ))}
           </div>
         )
