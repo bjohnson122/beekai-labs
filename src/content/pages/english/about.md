@@ -13,6 +13,7 @@ draft: false
 
 # Closing call to action, overriding src/content/sections/english/call-to-action.md on this page only
 ctaSection:
+  enable: false # Hidden on the About page. Set to true to show it again.
   # Alternative heading: "Ready to join the hive?"
   title: "Let's build something together."
   description: "From our New York hive to wherever you buzz. Local care, global reach."
