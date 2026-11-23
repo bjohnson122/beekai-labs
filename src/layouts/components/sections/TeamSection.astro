@@ -1,0 +1,78 @@
+---
+import type { z } from "astro/zod";
+import Icons from "@/helpers/Icons.astro";
+import { getSectionContent } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+import type { teamSectionSchema } from "@/sections.schema";
+import SectionHeader from "@/components/widgets/SectionHeader.astro";
+import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
+
+type TeamContent = NonNullable<z.infer<typeof teamSectionSchema>>;
+
+type Props = {
+  content?: TeamContent;
+};
+
+const {
+  enable = true,
+  title,
+  description,
+  focusLabel,
+  list = [],
+} = await getSectionContent<TeamContent>(
+  "team-section",
+  Astro.props.content,
+  Astro.currentLocale,
+);
+
+if (!enable || list.length === 0) {
+  return null;
+}
+---
+
+<section id="team">
+  <div class="container space-y-14">
+    <SectionHeader title={title} description={description} />
+    <ul class="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
+      {
+        list.map((member) => (
+          <li class="border-border-light flex h-full flex-col gap-6 border bg-white p-8">
+            {member.image ? (
+              <OptimizedImage
+                src={member.image}
+                alt={member.name}
+                width={224}
+                height={224}
+                loading="lazy"
+                class="size-28 rounded-full object-cover"
+              />
+            ) : (
+              <div class="bg-theme-darker text-accent flex size-28 items-center justify-center rounded-full">
+                <Icons icon="UserRound" class="size-12" aria-hidden="true" />
+              </div>
+            )}
+            <div class="space-y-3">
+              <h3 class="text-h5">{member.name}</h3>
+              {member.role && (
+                <p class="font-secondary text-accent-hover text-sm uppercase">
+                  {member.role}
+                </p>
+              )}
+              {member.bio && <p set:html={markdownify(member.bio)} />}
+              {member.focus && (
+                <p class="text-sm">
+                  {focusLabel && (
+                    <span class="font-secondary text-dark font-semibold uppercase">
+                      {focusLabel}:{" "}
+                    </span>
+                  )}
+                  {member.focus}
+                </p>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
